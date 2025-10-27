@@ -1,38 +1,16 @@
 "use client";
-
-"use client";
-
-import * as React from "react";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-
-import { ArrowUpDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Label } from "@/components/ui/label";
 import DataTableDemo from "@/components/data-table";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { Label } from "@/components/ui/label";
 
 // === Main table component ===
-function DataTable({ data, columns }) {
+export default function UsersPage() {
   return (
-    <Card className="w-full p-0 gap-0">
-      <div className="flex items-center justify-between gap-3 border-b p-6">
+    <Card className="w-full flex justify-center gap-0 p-0">
+      <div className="flex items-center justify-between gap-3 border-b p-5">
         {/* Search bar */}
         <Input
           placeholder="Search..."
@@ -49,17 +27,13 @@ function DataTable({ data, columns }) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => {}}>
-                EXCEL
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => {}}>
-                CSV
-              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {}}>EXCEL</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {}}>CSV</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
-      <div className="flex flex-col gap-3 p-6 border-b">
+      <div className="flex flex-col gap-3 p-5 border-b">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* filtri */}
           <div className="grid gap-1">
@@ -85,26 +59,15 @@ function DataTable({ data, columns }) {
         </div>
       </div>
 
-      <DataTableDemo/>
+      {/* tabella */}
+      <DataTableDemo />
 
       {/* Pagination */}
-      <div className="flex items-center justify-end space-x-2 gap-3 p-6">
-        <Button variant="outline" size="lg">
-          Previous
-        </Button>
-        <Button variant="outline" size="lg">
-          Next
-        </Button>
+      <div className="flex items-center justify-end space-x-2 gap-3 p-5">
+        <Button variant="outline">Previous</Button>
+        <Button variant="outline">Next</Button>
       </div>
     </Card>
   );
 }
 
-// === Page ===
-export default function UsersPage() {
-  return (
-    <div className="w-full flex justify-center p-4">
-      <DataTable />
-    </div>
-  );
-}

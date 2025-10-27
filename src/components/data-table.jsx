@@ -188,7 +188,7 @@ export default function DataTableDemo() {
   })
 
   return (
-    <div className="w-full border-b p-6">
+    <div className="w-full border-b p-5">
       <div className="overflow-hidden">
         <Table>
           <TableHeader>

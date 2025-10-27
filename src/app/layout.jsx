@@ -1,9 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/navbar.jsx";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Card } from "@/components/ui/card";
-import Link from "next/link";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,47 +26,23 @@ export default function RootLayout({ children }) {
       <body
         className={`w-screen h-screen flex gap-3${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AppSidebar />
-          <div className="w-full h-full flex flex-col">
-            <Navbar />
-            <div className="flex-1 w-full h-full p-5 overflow-y-auto overflow-x-hidden">{children}</div>
-          </div>
-        </ThemeProvider>
+        <SidebarProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AppSidebar />
+            <div className="w-full h-full flex flex-col">
+              <Navbar />
+              <div className="flex-1 w-full h-full p-5 overflow-y-auto overflow-x-hidden">
+                {children}
+              </div>
+            </div>
+          </ThemeProvider>
+        </SidebarProvider>
       </body>
     </html>
-  );
-}
-
-function AppSidebar() {
-  const links = [
-    { value: "Utenti", link: "users" },
-    { value: "VUOTO", link: "/" },
-    { value: "VUOTO", link: "/" },
-    { value: "VUOTO", link: "/" },
-    { value: "VUOTO", link: "/" },
-  ];
-  return (
-    <Card className={"hidden md:flex justify-between w-[350px] p-3 h-full rounded-none "}>
-      <div className="flex flex-col gap-3">
-        <p className="text-2xl font-bold py-6">MENU LATERALE</p>
-        <ul className="flex flex-col gap-3">
-          {links.map((item, i) => {
-            return (
-              <Link href={item.link} key={i}>
-                <li className="bg-card border rounded-md p-3">
-                  {item.value}
-                </li>
-              </Link>
-            );
-          })}
-        </ul>
-      </div>
-    </Card>
   );
 }
